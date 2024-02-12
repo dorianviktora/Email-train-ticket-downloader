@@ -1,6 +1,7 @@
 import imaplib
 import email
 import time
+import os
 
 imap_server = "imap.seznam.cz"
 imap = imaplib.IMAP4(imap_server)
@@ -33,18 +34,25 @@ def main():
                         continue
                     if part.get('Content-Disposition') is None:
                         continue
-                        
+
                     filename = part.get_filename()
                     data = part.get_payload(decode=True)
 
                     if not filename:
-                        print("part.get_filename() error")
+                        print("part.get_filename() error, abort")
                         return
                     
-                    with open(filename, 'wb') as file:
+                    downloads_folder = os.path.join(os.path.expanduser("~"), 'Downloads')
+                    if not os.path.exists(downloads_folder):
+                        print("/Downloads/ folder does not exists, abort")
+                        return
+                    
+                    file_path = os.path.join(downloads_folder, filename)
+
+                    with open(file_path, 'wb') as file:
                         file.write(data)
                         print(f"Attachment '{filename}' downloaded.")
-                
+
         time.sleep(20)
 
 
