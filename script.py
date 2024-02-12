@@ -42,9 +42,9 @@ def main():
                         print("part.get_filename() error, abort")
                         return
                     
-                    downloads_folder = os.path.join(os.path.expanduser("~"), 'Downloads')
+                    downloads_folder = os.path.join(os.path.expanduser("~"), '/sdcard/Download')
                     if not os.path.exists(downloads_folder):
-                        print("/Downloads/ folder does not exists, abort")
+                        print("/sdcard/Download/ folder does not exists, abort")
                         return
                     
                     file_path = os.path.join(downloads_folder, filename)
@@ -53,7 +53,7 @@ def main():
                         file.write(data)
                         print(f"Attachment '{filename}' downloaded.")
 
-        time.sleep(20)
+        time.sleep(10)
 
 
 if __name__ == "__main__":
