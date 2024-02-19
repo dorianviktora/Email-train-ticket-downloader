@@ -14,7 +14,7 @@ def check_message(msg_id, expected_sender) -> int | None:
     sender = message.get('From')
     print(f"New email recived from: {sender}")
 
-    if expected_sender.lower() != sender.lower():
+    if sender.lower() not in expected_sender.lower():
         print(f"New email is not from expected sender {expected_sender}. Continue waiting for ticket...")
         return
 
@@ -46,7 +46,7 @@ def check_message(msg_id, expected_sender) -> int | None:
 def main():
     email_address = input("Enter your email adress: ")
     email_password = input("Enter password for your email: ")
-    expected_sender = input("Enter expected email ticket sender. (jizdenky@idos.svt.cz)")
+    expected_sender = input("Enter expected email ticket sender. (jizdenky@idos.svt.cz): ")
 
     try:
         imap.login(email_address, email_password)
