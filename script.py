@@ -14,7 +14,7 @@ def check_message(msg_id, expected_sender) -> int | None:
     sender = message.get('From')
     print(f"New email recived from: {sender}")
 
-    if sender.lower() not in expected_sender.lower():
+    if expected_sender.lower() not in sender.lower():
         print(f"New email is not from expected sender {expected_sender}. Continue waiting for ticket...")
         return
 
